@@ -4,7 +4,7 @@ import ProtectedRoute from "./components/ProtectedRoute.js";
 import { AuthProvider, useAuth } from "./context/AuthContext.js";
 import routes from "./routes/routes.js";
 import "./main.scss";
-
+import './index.css';
 const App = () => {
   return (
     <AuthProvider>
