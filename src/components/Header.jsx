@@ -2,15 +2,27 @@
 import React from 'react';
 import { Search } from 'lucide-react';
 
-export const Header = () => {
+export const Header = ({ currentPage }) => {
+  const getPageTitle = () => {
+    const titles = {
+      'dashboard': 'Dashboard',
+      'projects': 'Projects',
+      'messages': 'Messages',
+      'board': 'Board',
+      'notifications': 'Notifications',
+      'clients': 'Clients',
+      'settings': 'Settings',
+      'plans': 'Plans'
+    };
+    return titles[currentPage] || 'Dashboard';
+  };
+
   return (
     <div className="w-full px-6 py-4 bg-white flex items-center justify-between border-b border-gray-100">
-      {/* Left section with Dashboard title */}
       <h1 className="text-xl font-semibold text-gray-900">
-        Dashboard
+        {getPageTitle()}
       </h1>
 
-      {/* Middle section with search */}
       <div className="flex-1 max-w-2xl mx-8">
         <div className="relative">
           <input 
@@ -25,9 +37,7 @@ export const Header = () => {
         </div>
       </div>
 
-      {/* Right section with ID and profile */}
       <div className="flex items-center gap-3">
-        {/* ID Selector */}
         <div className="flex items-center gap-2 px-3 py-1.5 bg-violet-100 rounded-lg">
           <span className="text-sm font-medium text-violet-900">ID</span>
           <svg 
@@ -48,7 +58,6 @@ export const Header = () => {
           </svg>
         </div>
 
-        {/* Profile Section */}
         <div className="flex items-center gap-3">
           <img 
             src="/api/placeholder/32/32"

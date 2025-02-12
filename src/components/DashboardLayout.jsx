@@ -1,18 +1,42 @@
 import React from 'react';
-import { Header } from './Header';
-import { Sidebar } from './Sidebar';
-
+import { Header } from './Header.jsx';
+import { Sidebar } from './Sidebar.jsx';
+import Dashboard from './pages/Dashboard'
+import Project from './pages/Project'
+import { useState } from 'react';
 const DashboardLayout = () => {
+  const [currentPage, setCurrentPage] = useState('dashboard');
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'dashboard':
+        return <Dashboard />;
+      case 'projects':
+        return <Project />;
+      // case 'messages':
+      //   return <MessagePage />;
+      // case 'board':
+      //   return <BoardPage />;
+      // case 'notifications':
+      //   return <NotificationPage />;
+      // case 'clients':
+      //   return <ClientPage />;
+      // case 'settings':
+      //   return <SettingsPage />;
+      // case 'plans':
+      //   return <PlansPage />;
+      default:
+        return <Dashboard />;
+    }
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-50">
-      <Sidebar />
+      <Sidebar currentPage={currentPage} setCurrentPage={setCurrentPage} />
       <div className="flex-1">
-        <Header />
+        <Header currentPage={currentPage} />
         <div className="p-6">
-          {/* Main content would go here */}
-          <div className="p-4 bg-white rounded-lg">
-            <p className="text-gray-600">Main dashboard content would go here</p>
-          </div>
+          {renderPage()}
         </div>
       </div>
     </div>
