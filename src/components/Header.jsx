@@ -1,8 +1,8 @@
 // Header.jsx
 import React from 'react';
-import { Search } from 'lucide-react';
+import { Search,Menu } from 'lucide-react';
 
-export const Header = ({ currentPage }) => {
+export const Header = ({ currentPage, isMobile, setIsOpen }) => {
   const getPageTitle = () => {
     const titles = {
       'dashboard': 'Dashboard',
@@ -18,12 +18,20 @@ export const Header = ({ currentPage }) => {
   };
 
   return (
-    <div className="w-full px-6 py-4 bg-white flex items-center justify-between border-b border-gray-100">
-      <h1 className="text-xl font-semibold text-gray-900">
-        {getPageTitle()}
-      </h1>
+    <div className="w-full px-4 md:px-6 py-4 bg-white flex items-center justify-between border-b border-gray-100">
+      <div className="flex items-center gap-3">
+        <button 
+          onClick={() => setIsOpen(true)}
+          className="p-1 -ml-1 text-gray-500 hover:text-gray-700 md:hidden"
+        >
+          <Menu size={24} />
+        </button>
+        <h1 className="text-xl font-semibold text-gray-900">
+          {getPageTitle()}
+        </h1>
+      </div>
 
-      <div className="flex-1 max-w-2xl mx-8">
+      <div className="flex-1 max-w-2xl mx-8 hidden md:block">
         <div className="relative">
           <input 
             type="text"
@@ -38,7 +46,7 @@ export const Header = ({ currentPage }) => {
       </div>
 
       <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-violet-100 rounded-lg">
+        <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-violet-100 rounded-lg">
           <span className="text-sm font-medium text-violet-900">ID</span>
           <svg 
             width="16" 
@@ -64,7 +72,7 @@ export const Header = ({ currentPage }) => {
             alt="Profile"
             className="w-8 h-8 rounded-full"
           />
-          <div className="flex flex-col">
+          <div className="hidden sm:flex flex-col">
             <span className="text-sm font-medium text-gray-900">ASRIL IBRAHIM</span>
             <span className="text-xs text-gray-500">asril.ibrahim@mockmail.com</span>
           </div>
