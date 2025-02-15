@@ -34,6 +34,12 @@ const NavItem = ({ icon, label, isActive, onClick }) => {
 
 export const Sidebar = ({ currentPage, setCurrentPage,isMobile, isOpen, setIsOpen }) => {
   const sidebarBaseClasses = "w-64 bg-white flex flex-col border-r border-gray-100";
+  const navItems = [
+    { label: "Dashboard", icon: <Home size={18} />, page: "dashboard" },
+    { label: "Projects", icon: <FolderOpen size={18} />, page: "projects" },
+    { label: "Messages", icon: <MessageSquare size={18} />, page: "messages" },
+    { label: "Notifications", icon: <Bell size={18} />, page: "notifications" },
+  ];
   
   // Mobile-specific classes
   const mobileSidebarClasses = `
@@ -74,44 +80,21 @@ export const Sidebar = ({ currentPage, setCurrentPage,isMobile, isOpen, setIsOpe
           {/* Navigation */}
           <nav>
             <ul className="space-y-1">
-              <NavItem 
-                icon={<Home size={18} />} 
-                label="Dashboard" 
-                isActive={currentPage === 'dashboard'}
-                onClick={() => {
-                  setCurrentPage('dashboard');
-                  if (isMobile) setIsOpen(false);
-                }}
-              />
-              <NavItem 
-                icon={<FolderOpen size={18} />} 
-                label="Projects" 
-                isActive={currentPage === 'projects'}
-                onClick={() => {
-                  setCurrentPage('projects');
-                  if (isMobile) setIsOpen(false);
-                }}
-              />
-              <NavItem 
-                icon={<MessageSquare size={18} />} 
-                label="Messages" 
-                isActive={currentPage === 'messages'}
-                onClick={() => {
-                  setCurrentPage('messages');
-                  if (isMobile) setIsOpen(false);
-                }}
-              />
-              <NavItem 
-                icon={<Bell size={18} />} 
-                label="Notifications" 
-                isActive={currentPage === 'notifications'}
-                onClick={() => {
-                  setCurrentPage('notifications');
-                  if (isMobile) setIsOpen(false);
-                }}
-              />
+              {navItems.map((item) => (
+                <NavItem
+                  key={item.page}
+                  icon={item.icon}
+                  label={item.label}
+                  isActive={currentPage === item.page}
+                  onClick={() => {
+                    setCurrentPage(item.page);
+                    if (isMobile) setIsOpen(false);
+                  }}
+                />
+              ))}
             </ul>
           </nav>
+
         </div>
 
         {/* Logout button */}
