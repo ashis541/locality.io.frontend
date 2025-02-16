@@ -18,24 +18,13 @@ const DashboardLayout = () => {
         setIsOpen(false);
       }
     };
-
     // Initial check
     checkMobile();
-
     // Add event listener
     window.addEventListener('resize', checkMobile);
-
     // Cleanup
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-
-  // const renderPage = () => {
-  //   switch (currentPage) {
-  //     case 'dashboard':
-  //     default:
-  //       return <DashboardPage />;
-  //   }
-  // };
 
   const renderPage = () => {
     switch (currentPage) {

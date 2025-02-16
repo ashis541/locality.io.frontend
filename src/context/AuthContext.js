@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-
+import axios from "axios";
+import MainApi from '../api/main.api.js'
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -7,11 +8,20 @@ export const AuthProvider = ({ children }) => {
     return localStorage.getItem("isAuthenticated") === "true"; // Persist auth state
   });
 
+  const login = async (credentials) => {
+    try {
+      const { data } = await MainApi.loginServices(credentials);
+      localStorage.setItem("user", JSON.stringify(data));
+      setIsAuthenticated(data);
+    } catch (error) {
+      console.error("Login failed", error.response?.data || error.message);
+    }
+  };
+
   useEffect(() => {
     localStorage.setItem("isAuthenticated", isAuthenticated);
   }, [isAuthenticated]);
 
-  const login = () => setIsAuthenticated(true);
   const logout = () => {
     setIsAuthenticated(false);
     localStorage.removeItem("isAuthenticated");

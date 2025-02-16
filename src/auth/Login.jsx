@@ -1,6 +1,19 @@
 import React from "react";
-
+import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    await login({ email, password });
+    navigate("/dashboard");
+  };
   return (
     <div className="min-h-screen flex bg-gradient-to-br from-indigo-50 to-pink-50">
       {/* Image Section */}
@@ -23,13 +36,15 @@ const Login = () => {
             <p className="text-center text-gray-500">Please enter your details</p>
           </div>
           
-          <form className="mt-8 space-y-6" action="#" method="POST">
+          <form className="mt-8 space-y-6" action="#"onSubmit={handleLogin}>
             <div className="space-y-5">
               <div className="space-y-1">
                 <label className="text-sm font-medium text-gray-700">Email</label>
                 <input
                   type="email"
                   required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200"
                   placeholder="Enter your email"
                 />
@@ -39,6 +54,8 @@ const Login = () => {
                 <input
                   type="password"
                   required
+                  value={password} 
+                  onChange={(e) => setPassword(e.target.value)}
                   className="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200"
                   placeholder="Enter your password"
                 />

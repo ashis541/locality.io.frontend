@@ -1,63 +1,63 @@
-const baseUrl = 'http://localhost:3000/api/v1/';
+import axios from "axios";
+const baseUrl = "http://localhost:8000/api/v1/";
 
 class Mainapi {
+    constructor() {
+        this.api = axios.create({
+            baseURL: baseUrl,
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+    }
+
     getToken() {
-        return localStorage.getItem('token'); // Retrieve token dynamically
+        return localStorage.getItem("token");
     }
 
     async loginServices(credentials) {
         try {
-            const response = await fetch(`${baseUrl}login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(credentials),
-            });
-            const data = await response.json();
-
-            if (data.token) {
-                localStorage.setItem('token', data.token); // Store token globally
+            const response = await this.api.post("users/login", credentials);
+            
+            if (response.data.token) {
+                localStorage.setItem("token", response.data.token);
             }
 
-            return data;
+            return response.data;
         } catch (error) {
-            console.error('Login failed:', error);
+            console.error("Login failed:", error.response?.data || error.message);
+            throw error;
         }
     }
 
     async logoutServices() {
         try {
-            const response = await fetch(`${baseUrl}logout`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.getToken()}`,
-                },
-            });
+            const response = await this.api.post(
+                "logout",
+                {},
+                { headers: { Authorization: `Bearer ${this.getToken()}` } }
+            );
 
-            localStorage.removeItem('token'); // Remove token on logout
-            return await response.json();
+            localStorage.removeItem("token"); 
+            return response.data;
         } catch (error) {
-            console.error('Logout failed:', error);
+            console.error("Logout failed:", error.response?.data || error.message);
+            throw error;
         }
     }
 
     async getAllBranch() {
         try {
-            const response = await fetch(`${baseUrl}branches`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.getToken()}`,
-                },
+            const response = await this.api.get("branches", {
+                headers: { Authorization: `Bearer ${this.getToken()}` },
             });
-            return await response.json();
+
+            return response.data;
         } catch (error) {
-            console.error('Fetching branches failed:', error);
+            console.error("Fetching branches failed:", error.response?.data || error.message);
+            throw error;
         }
     }
 }
 
-// Export the class without instantiating it
-export default Mainapi;
+export default new Mainapi(); // Export a single instance for easier use
