@@ -42,8 +42,8 @@ const StatusCards = () => {
       icon: PlusCircle,
       title: "CREATE NEW",
       subtitle: "PROJECT",
-      bgColor: "bg-blue-600",
-      iconColor: "bg-blue-700"
+      bgColor: "bg-blue-50",
+      iconColor: "bg-blue-500"
     }
   ];
 
