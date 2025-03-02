@@ -186,3 +186,83 @@
     }
   }
 }
+
+/* BranchModal.css */
+
+.branch-modal-overlay {
+  backdrop-filter: blur(4px);
+}
+
+.modal-header {
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-header::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: rgba(255, 255, 255, 0.1);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.modal-header::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+  background: rgba(255, 255, 255, 0.05);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+input:focus, 
+select:focus, 
+textarea:focus {
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+  transition: all 0.2s ease;
+}
+
+input, select, textarea {
+  transition: border-color 0.2s ease;
+}
+
+.text-red-500 {
+  display: inline-block;
+  margin-left: 2px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header h2,
+.modal-header p {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.modal-header h2 {
+  animation-delay: 0.1s;
+}
+
+.modal-header p {
+  animation-delay: 0.2s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .inline-block.max-w-4xl {
+    max-width: 95%;
+  }
+}
