@@ -62,34 +62,35 @@ const PieCharts = () => {
 
   return (
     <div className="bg-white rounded-lg shadow p-6">
-      {/* Header with checkbox */}
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg font-semibold">Charts Overview</h2>
-        <div className="flex items-center gap-4">
-          <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
-            <input type="checkbox" className="form-checkbox h-4 w-4 text-blue-500" />
-            Chart
-          </label>
-          <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
-            <input type="checkbox" className="form-checkbox h-4 w-4 text-blue-500" />
-            Show Value
-          </label>
-        </div>
-      </div>
-
-      {/* Charts container */}
-      <div className="flex justify-center gap-4">
-        {metrics.map((metric, index) => (
-          <PieChartCard
-            key={index}
-            title={metric.title}
-            value={metric.value}
-            color={metric.color}
-            description={metric.description}
-          />
-        ))}
+    {/* Header with checkbox */}
+    <div className="flex justify-between items-center flex-wrap gap-4 mb-6">
+      <h2 className="text-lg font-semibold">Charts Overview</h2>
+      <div className="flex items-center gap-4">
+        <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+          <input type="checkbox" className="form-checkbox h-4 w-4 text-blue-500" />
+          Chart
+        </label>
+        <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+          <input type="checkbox" className="form-checkbox h-4 w-4 text-blue-500" />
+          Show Value
+        </label>
       </div>
     </div>
+  
+    {/* Charts container */}
+    <div className="flex flex-wrap justify-center gap-6">
+      {metrics.map((metric, index) => (
+        <PieChartCard
+          key={index}
+          title={metric.title}
+          value={metric.value}
+          color={metric.color}
+          description={metric.description}
+        />
+      ))}
+    </div>
+  </div>
+  
   );
 };
 
