@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BranchCreationModal from './modals/BranchCreationModal.jsx'
+import getAllBranch from '../../'
 
 const Project = () => {
   const [branches, setBranches] = useState([
@@ -7,6 +8,10 @@ const Project = () => {
     { id: 2, name: 'Westside Office', address: '456 Oak Ave, San Francisco, CA', phone: '415-555-0102', manager: 'Sarah Johnson', employees: 28 },
     { id: 3, name: 'Eastside Branch', address: '789 Pine Blvd, Boston, MA', phone: '617-555-0103', manager: 'Michael Chen', employees: 32 },
   ]);
+
+  useEffect(() => {
+    
+  },[])
   
   const [formData, setFormData] = useState({
     name: '',
