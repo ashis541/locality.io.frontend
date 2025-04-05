@@ -36,7 +36,7 @@ export const Sidebar = ({ currentPage, setCurrentPage,isMobile, isOpen, setIsOpe
   const sidebarBaseClasses = "w-64 bg-white flex flex-col border-r border-gray-100";
   const navItems = [
     { label: "Dashboard", icon: <Home size={18} />, page: "dashboard" },
-    { label: "Projects", icon: <FolderOpen size={18} />, page: "projects" },
+    { label: "Branches", icon: <FolderOpen size={18} />, page: "projects" },
     { label: "Messages", icon: <MessageSquare size={18} />, page: "messages" },
     { label: "Notifications", icon: <Bell size={18} />, page: "notifications" },
   ];

@@ -5,23 +5,23 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem("isAuthenticated") === "true"; // Persist auth state
+    return JSON.parse(localStorage.getItem("isAuthenticated") || "false"); // Convert properly
   });
+  
+  useEffect(() => {
+    localStorage.setItem("isAuthenticated", JSON.stringify(isAuthenticated)); // Store properly
+  }, [isAuthenticated]);
 
   const login = async (credentials) => {
     try {
       const { data } = await MainApi.loginServices(credentials);
       localStorage.setItem("user", JSON.stringify(data));
-      setIsAuthenticated(data);
+      localStorage.setItem("isAuthenticated", "true"); // Ensure it's saved as "true"
+      setIsAuthenticated(true);
     } catch (error) {
       console.error("Login failed", error.response?.data || error.message);
     }
   };
-
-  useEffect(() => {
-    localStorage.setItem("isAuthenticated", isAuthenticated);
-  }, [isAuthenticated]);
-
   const logout = () => {
     setIsAuthenticated(false);
     localStorage.removeItem("isAuthenticated");
