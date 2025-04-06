@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import BranchCreationModal from './modals/BranchCreationModal.jsx'
-import getAllBranch from '../../'
+import {fetchAllbranch} from '../../store/thunks/branchThunk.js'
+import {useAppDispatch,useAppSelector} from '../../store/hooks.js'
 
 const Project = () => {
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    console.log('Fetching branches...', fetchAllbranch);
+    dispatch(fetchAllbranch())
+    
+  },[])
   const [branches, setBranches] = useState([
     { id: 1, name: 'Downtown HQ', address: '123 Main St, New York, NY', phone: '212-555-0101', manager: 'John Smith', employees: 45 },
     { id: 2, name: 'Westside Office', address: '456 Oak Ave, San Francisco, CA', phone: '415-555-0102', manager: 'Sarah Johnson', employees: 28 },
     { id: 3, name: 'Eastside Branch', address: '789 Pine Blvd, Boston, MA', phone: '617-555-0103', manager: 'Michael Chen', employees: 32 },
   ]);
-
-  useEffect(() => {
-    
-  },[])
   
   const [formData, setFormData] = useState({
     name: '',

@@ -1,8 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import userReducer from "./slice/userSlice"; // ✅ Correct import
+import branchReducer  from "./slice/branchSlice.js"; // Correct import of the branch reducer
 
 const rootReducer = combineReducers({
-  user: userReducer, // ✅ Correct key-value pair
+  branch: branchReducer, // ✅ Correct key-value pair
 });
 
 export default rootReducer;

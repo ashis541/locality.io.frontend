@@ -12,7 +12,8 @@ class Mainapi {
     }
 
     getToken() {
-        return localStorage.getItem("token");
+    const userData=localStorage.getItem("user");
+    return userData ? JSON.parse(userData).accessToken : null;
     }
 
     async loginServices(credentials) {
@@ -48,7 +49,7 @@ class Mainapi {
 
     async getAllBranch() {
         try {
-            const response = await this.api.get("branches", {
+            const response = await this.api.get("organization/branch/getAllBranch", {
                 headers: { Authorization: `Bearer ${this.getToken()}` },
             });
 
