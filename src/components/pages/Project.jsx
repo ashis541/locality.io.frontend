@@ -6,8 +6,9 @@ import {useAppDispatch,useAppSelector} from '../../store/hooks.js'
 const Project = () => {
   const dispatch = useAppDispatch()
   useEffect(() => {
+    const branchid = 1; // Replace with the actual branch ID you want to fetch
     console.log('Fetching branches...', fetchAllbranch);
-    dispatch(fetchAllbranch())
+    dispatch(fetchAllbranch(branchid))
     
   },[])
   const [branches, setBranches] = useState([

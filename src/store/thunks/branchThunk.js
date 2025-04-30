@@ -6,7 +6,7 @@ export const fetchAllbranch = createAsyncThunk(
   'branch/fetchAll',
   async (_, thunkAPI) => {
     try {
-      const data = await Mainapi.getAllBranch(); // Already returns response.data
+      const data = await Mainapi.getAllBranch(branchid); // Already returns response.data
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);

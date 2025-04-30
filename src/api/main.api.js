@@ -47,14 +47,14 @@ class Mainapi {
         }
     }
 
-    async getAllBranch() {
+    async getAllBranch(branchid) {
         try {
-            const response = await this.api.get("organization/branch/getAllBranch", {
+            const response = await this.api.get(`organization/branch/getAllBranch/${branchid}`, {
                 headers: { Authorization: `Bearer ${this.getToken()}` },
             });
-
             return response.data;
-        } catch (error) {
+        }
+         catch (error) {
             console.error("Fetching branches failed:", error.response?.data || error.message);
             throw error;
         }
